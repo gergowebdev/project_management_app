@@ -7,7 +7,6 @@ const ProjectsSidebar = () => {
             <div>
                 <button> + Add Project</button>
             </div>
-            <ul>...</ul>
         </aside>
     );
 };
