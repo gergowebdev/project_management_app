@@ -9,6 +9,7 @@ function App() {
         projects: [],
     });
 
+    // Starting the adding process
     function handleStartAddProject() {
         setProjectsState((prevState) => {
             return {
@@ -18,6 +19,7 @@ function App() {
         });
     }
 
+    // Finishing the adding process
     function handleAddProject(projectData) {
         setProjectsState((prevState) => {
             const newProject = {
@@ -28,8 +30,16 @@ function App() {
             return {
                 ...prevState,
                 selectedProjectId: undefined,
-                projects: [...prevState.projects],
-                newProject,
+                projects: [...prevState.projects, newProject],
+            };
+        });
+    }
+
+    function handleCancelAddProject() {
+        setProjectsState((prevState) => {
+            return {
+                ...prevState,
+                selectedProjectId: undefined,
             };
         });
     }
@@ -37,7 +47,12 @@ function App() {
     let content;
 
     if (projectsState.selectedProjectId === null) {
-        content = <NewProject onAdd={handleAddProject} />;
+        content = (
+            <NewProject
+                onAdd={handleAddProject}
+                onCancel={handleCancelAddProject}
+            />
+        );
     } else if (projectsState.selectedProjectId === undefined) {
         content = (
             <NoProjectSelected onStartAddProject={handleStartAddProject} />
